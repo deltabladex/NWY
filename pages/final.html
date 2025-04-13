@@ -3,74 +3,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Gift 🎉</title>
+  <title>Forever Yours 💞</title>
   <style>
     body {
+      margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: #fff0f5;
+      background: linear-gradient(to right, #fde2ff, #e0c3fc);
+      color: #5d3a9b;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       text-align: center;
+      overflow: hidden;
     }
-    .gift-box {
-      background: white;
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff69b4;
+      animation: float 6s ease-in infinite;
+      clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 80%, 25% 100%, 0% 35%);
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .message-box {
+      background: rgba(255, 255, 255, 0.85);
       padding: 30px;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+
+    .gif {
+      margin-top: 20px;
+      max-width: 100px;
+      border-radius: 10px;
+    }
+
+    #love-counter {
+      font-size: 1.1rem;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #c9184a;
     }
   </style>
 </head>
 <body>
-<section style="text-align: center; padding: 40px; background: linear-gradient(to bottom, #fff0f5, #ffe4e1); font-family: 'Poppins', sans-serif;">
-  <h2 style="font-size: 2rem; color: #e63946; margin-bottom: 30px;">📸 Our Sweet Memories</h2>
-
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-    <div onclick="showPopup('Yaad chha maya!!! when we tried making hearts. mero maya risayera nabhayera haii. Cute chha mero reshu 💕')" style="background: white; padding: 10px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 150px; transform: rotate(-3deg); cursor: pointer;">
-      <img src="../images/po1.jpg" alt="Memory 1" style="width: 100%; border-radius: 8px;height:5.5cm;">
-      <p style="margin-top: 8px; font-size: 14px; color: #e63946;">Silly Video Call 🥰</p>
-    </div>
-
-    <div onclick="showPopup('Haaamro Toothbrush kyaaaa cute picture memory related chha yo pic ma 🛵💖')" style="background: white; padding: 10px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 150px; transform: rotate(2deg); cursor: pointer;">
-      <img src="../images/po2.jpg" alt="Memory 2" style="width: 100%; border-radius: 8px;">
-      <p style="margin-top: 8px; font-size: 14px; color: #e63946;">Toothbrush Couple 🍕</p>
-    </div>
-
-    <div onclick="showPopup('Yo jhan ka birsinu hou mayaaa!!! Mero maya danger bargaining gardine🌙✨')" style="background: white; padding: 10px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 150px; transform: rotate(-1.5deg); cursor: pointer;">
-      <img src="../images/po3.jpg" alt="Memory 3" style="width: 100%; border-radius: 8px;">
-      <p style="margin-top: 8px; font-size: 14px; color: #e63946;">That Chasma Magic💫</p>
-    </div>
-  </div>
-
-  <!-- Popup Modal -->
-  <div id="popup" style="display:none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); justify-content: center; align-items: center; z-index: 9999;">
-    <div style="background: #fff; border-radius: 15px; padding: 30px; max-width: 90%; width: 350px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative;">
-      <span onclick="closePopup()" style="position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #999;">&times;</span>
-      <p id="popup-text" style="font-size: 1.1rem; color: #e63946; margin-top: 10px;"></p>
-    </div>
-  </div>
-</section>
-
-
-  <div class="gift-box">
-    <h2>Your Lucky Gift is... 🎁</h2>
-    <p id="giftResult">Spinning...</p>
-  </div>
+  <!-- Floating hearts animation -->
   <script>
-    const options = JSON.parse(localStorage.getItem('giftOptions') || '[]');
-    const pick = options[Math.floor(Math.random() * options.length)] || 'My love forever ❤️';
-    document.getElementById('giftResult').textContent = pick;
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 5 + 4) + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
 
-  function showPopup(text) {
-    document.getElementById('popup-text').textContent = text;
-    document.getElementById('popup').style.display = 'flex';
-  }
+  <div class="message-box">
+    <h1>My Forever, My Always 💖</h1>
+    <p>From laughs to long-distance calls, surprise food orders to silly games...</p>
+    <p>You made everything magical, just by being you.</p>
+    <p>I promise to love you endlessly, through every moment, every season, every distance.</p>
+    <p>This website is just a small piece of the big, warm, crazy love I feel for you every single day. 💗</p>
 
-  function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-  }
+    <!-- LOVE COUNTER -->
+    <div id="love-counter">
+      Together since November 25, 2023:<br />
+      <span id="duration"></span>
+    </div>
+
+    <img class="gif" src="https://media.giphy.com/media/fxsqOYnIMEefC/giphy.gif" alt="Cute Hugging GIF" />
+    <p class="footer">Happy New Year, my Reshu 💫<br>Always yours, forever and ever. 💍</p>
+  </div>
+
+  <script>
+    function updateLoveCounter() {
+      const startDate = new Date("November 25, 2023 00:00:00");
+      const now = new Date();
+      let diff = now - startDate;
+
+      const seconds = Math.floor(diff / 1000) % 60;
+      const minutes = Math.floor(diff / (1000 * 60)) % 60;
+      const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      const months = Math.floor(days / 30.44);
+      const years = Math.floor(months / 12);
+
+      const display = `
+        ${years} years,
+        ${months % 12} months,
+        ${days % 30} days,
+        ${hours} hours,
+        ${minutes} minutes,
+        ${seconds} seconds
+      `;
+
+      document.getElementById('duration').textContent = display;
+    }
+
+    setInterval(updateLoveCounter, 1000);
+    updateLoveCounter();
   </script>
 </body>
 </html>
