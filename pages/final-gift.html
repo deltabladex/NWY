@@ -33,6 +33,11 @@
     const options = JSON.parse(localStorage.getItem('giftOptions') || '[]');
     const pick = options[Math.floor(Math.random() * options.length)] || 'My love forever ❤️';
     document.getElementById('giftResult').textContent = pick;
+
+    if (localStorage.getItem("gamePassed") !== "true") {
+      alert("Oops! You need to solve the game first 💡");
+      window.location.href = "../pages/landing-game.html";
+    }
   </script>
 </body>
 </html>
