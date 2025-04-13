@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Gift 🎉</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff0f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .gift-box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="gift-box">
+    <h2>Your Lucky Gift is... 🎁</h2>
+    <p id="giftResult">Spinning...</p>
+  </div>
+  <script>
+    const options = JSON.parse(localStorage.getItem('giftOptions') || '[]');
+    const pick = options[Math.floor(Math.random() * options.length)] || 'My love forever ❤️';
+    document.getElementById('giftResult').textContent = pick;
+  </script>
+</body>
+</html>

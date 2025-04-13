@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your New Year Surprise</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ffe0e9, #fff5f5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+    }
+    .message-box {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin-bottom: 30px;
+    }
+    .red-envelope {
+      background-color: #e63946;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="message-box">
+    <h1>Happy New Year My Reshu 💖</h1>
+    <p>This New Year, I just want to say thank you for being in my life. You've filled my days with laughter, love, and magic. 🥹✨</p>
+    <p>Now, remember the Doraemon red envelope joke? 😂 Click it and let’s see what lucky gift you get!</p>
+    <button class="red-envelope" onclick="redirectToGift()">🎁 Red Envelope</button>
+  </div>
+  <script>
+    if (localStorage.getItem("gamePassed") !== "true") {
+      alert("Oops! You need to solve the game first 💡");
+      window.location.href = "../pages/landing-game.html";
+    }
+
+    function redirectToGift() {
+      window.location.href = "final-gift.html";
+    }
+  </script>
+</body>
+</html>

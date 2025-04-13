@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Memories 📸</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fff0f5, #ffe4e1);
+      color: #333;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    h1 {
+      text-align: center;
+      color: #d6336c;
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      animation: floatIn 1s ease forwards;
+    }
+    @keyframes floatIn {
+      0% { transform: translateY(-30px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .memory {
+      margin: 20px auto;
+      max-width: 600px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 25px;
+      transition: all 0.3s ease;
+    }
+    .memory summary {
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: #e84393;
+      transition: color 0.3s;
+    }
+    .memory summary:hover {
+      color: #c2255c;
+    }
+    .memory img {
+      width: 100%;
+      margin-top: 15px;
+      border-radius: 12px;
+      display: none;
+    }
+    .memory[open] img {
+      display: block;
+      animation: popIn 0.6s ease;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.95); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .go-to-ending {
+      text-align: center;
+      margin-top: 50px;
+    }
+    .go-to-ending p {
+      font-size: 18px;
+      color: #a52a72;
+      margin-bottom: 12px;
+    }
+    .go-to-ending button {
+      padding: 14px 30px;
+      font-size: 20px;
+      background-color: #ff6bcb;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .go-to-ending button:hover {
+      background-color: #ff3ea1;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Long Distance Love Story 💕</h1>
+  <div class="memory">
+    <h3 onclick="toggle(this)">✈️ The night before your flight — I tracked every second and cried quietly missing you already.</h3>
+    <img src="../images/pic1.png" />
+  </div>
+  <div class="memory">
+    <h3 onclick="toggle(this)">🫂 Hugging you again in Nepal — that first hug after so long was everything.</h3>
+    <img src="../images/opp.jpg" />
+  </div>
+  <div class="memory">
+    <h3 onclick="toggle(this)">🎮 Playing games, laughing like kids, making our own little fun world together.</h3>
+    <img src="../images/pic2.jpg" />
+  </div>
+  <div class="memory">
+    <h3 onclick="toggle(this)">🌌 Falling asleep to my silly radio voice and waking up to me being your alarm 😅</h3>
+    <img src="../images/pic6.jpg" />
+  </div>
+  <div class="memory">
+    <h3 onclick="toggle(this)">📦 Me being your delivery boy from another country, ordering you food just to see you smile.</h3>
+    <img src="../images/pic5.jpg" />
+  </div>
+<div class="go-to-ending">
+    <p>💌 You've opened your heart to our story... ready for the grand finale? 🌟</p>
+    <button onclick="window.location.href='final.html'">💖 See How Long We've Been Together</button>
+  </div>
+  <script>
+    function toggle(el) {
+      const img = el.nextElementSibling;
+      img.style.display = img.style.display === 'block' ? 'none' : 'block';
+    }
+    if (localStorage.getItem("gamePassed") !== "true") {
+      alert("Oops! You need to solve the game first 💡");
+      window.location.href = "../pages/landing-game.html";
+    }
+  </script>
+</body>
+</html>

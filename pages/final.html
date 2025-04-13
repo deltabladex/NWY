@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forever Yours 💞</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fde2ff, #e0c3fc);
+      color: #5d3a9b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff69b4;
+      animation: float 6s ease-in infinite;
+      clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 80%, 25% 100%, 0% 35%);
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .message-box {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 600px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+
+    .gif {
+      margin-top: 20px;
+      max-width: 100px;
+      border-radius: 10px;
+    }
+
+    #love-counter {
+      font-size: 1.1rem;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #c9184a;
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts animation -->
+  <script>
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 5 + 4) + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <div class="message-box">
+    <h1>My Forever, My Always 💖</h1>
+    <p>From laughs to long-distance calls, surprise food orders to silly games...</p>
+    <p>You made everything magical, just by being you.</p>
+    <p>I promise to love you endlessly, through every moment, every season, every distance.</p>
+    <p>This website is just a small piece of the big, warm, crazy love I feel for you every single day. 💗</p>
+
+    <!-- LOVE COUNTER -->
+    <div id="love-counter">
+      Together since November 25, 2023:<br />
+      <span id="duration"></span>
+    </div>
+
+    <img class="gif" src="https://media.giphy.com/media/fxsqOYnIMEefC/giphy.gif" alt="Cute Hugging GIF" />
+    <p class="footer">Happy New Year, my Reshu 💫<br>Always yours, forever and ever. 💍</p>
+  </div>
+
+  <script>
+    function updateLoveCounter() {
+      const startDate = new Date("November 25, 2023 00:00:00");
+      const now = new Date();
+      let diff = now - startDate;
+
+      const seconds = Math.floor(diff / 1000) % 60;
+      const minutes = Math.floor(diff / (1000 * 60)) % 60;
+      const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      const months = Math.floor(days / 30.44);
+      const years = Math.floor(months / 12);
+
+      const display = `
+        ${years} years,
+        ${months % 12} months,
+        ${days % 30} days,
+        ${hours} hours,
+        ${minutes} minutes,
+        ${seconds} seconds
+      `;
+
+      document.getElementById('duration').textContent = display;
+    }
+
+    setInterval(updateLoveCounter, 1000);
+    updateLoveCounter();
+  </script>
+</body>
+</html>

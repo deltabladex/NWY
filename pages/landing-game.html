@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Landing Game</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fff0f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .game-box {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    input, button {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-box">
+    <h1>Guess the Secret Word 💌</h1>
+    <p>Hint: It's what I call you</p>
+    <input id="answer" placeholder="Enter the cute nickname" />
+    <button onclick="checkAnswer()">Submit</button>
+    <p id="result"></p>
+  </div>
+  <script>
+function checkAnswer() {
+      const val = document.getElementById('answer').value.trim().toLowerCase(); // Make sure extra spaces are trimmed
+      if (val === 'reshu') { // Direct match (case-insensitive)
+        localStorage.setItem("gamePassed", "true"); // ✅ Mark as passed
+        window.location.href = 'gift-entry.html';   // ✅ Move to next step
+      } else {
+        document.getElementById('result').textContent = 'Try again with more love! 💕';
+      }
+    }
+  </script>
+</body>
+</html>

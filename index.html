@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy New Year, Reshu ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <nav>
+    <a href="pages/landing-game.html" target="content-frame">Game</a>
+    <a href="pages/gift-entry.html" target="content-frame">Enter Gift</a>
+    <a href="pages/message-envelope.html" target="content-frame">Message</a>
+    <a href="pages/final-gift.html" target="content-frame">Gift Reveal</a>
+    <a href="pages/memory-collage.html" target="content-frame">Memories</a>
+  </nav>
+  <iframe name="content-frame" src="pages/landing-game.html"></iframe>
+  <audio id="bg-music" src="music/background.mp3" autoplay loop></audio>
+  <button id="music-toggle">🎵</button>
+  <script>
+    const btn = document.getElementById('music-toggle');
+    const music = document.getElementById('bg-music');
+    btn.onclick = () => {
+      if (music.paused) {
+        music.play();
+        btn.textContent = '🔊';
+      } else {
+        music.pause();
+        btn.textContent = '🔇';
+      }
+    };
+  </script>
+</body>
+</html>
