@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory Match Game</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ffe0e9, #fff5f5);
+      text-align: center;
+      padding: 40px 10px;
+    }
+
+    h1 {
+      color: #e63946;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      grid-gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .card {
+      width: 80px;
+      height: 80px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+    }
+
+    .card-front {
+      background: #ffc1cc;
+    }
+
+    .card-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    #giftContainer {
+      display: none;
+      margin-top: 30px;
+    }
+
+    #giftResult {
+      font-size: 1.5rem;
+      color: #d0006f;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Memory Match Game 💑</h1>
+  <p>Match all the couple pics to unlock your reward! 🎁</p>
+
+  <div class="grid" id="gameGrid"></div>
+
+  <div id="giftContainer">
+    <h2>You did it, my love! 💖 Pro!!! Gamer 👑</h2>
+    <p>Your First Prize is...</p>
+    <div id="giftResult">🎁</div>
+  </div>
+
+  <script>
+    const images = [
+      '../images/opp.jpg', '../images/til1.jpg', '../images/til2.jpg', '../images/til3.jpg',
+      '../images/til4.jpg', '../images/til5.jpg', '../images/til6.jpg', '../images/til7.jpg'
+    ];
+
+    const doubledImages = [...images, ...images];
+    const shuffled = doubledImages.sort(() => 0.5 - Math.random());
+
+    const gameGrid = document.getElementById('gameGrid');
+    let flippedCards = [];
+    let matched = 0;
+
+    shuffled.forEach((img, index) => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.dataset.image = img;
+
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-front"></div>
+          <div class="card-back"><img src="${img}" alt="pic"/></div>
+        </div>
+      `;
+
+      card.addEventListener('click', () => {
+        if (card.classList.contains('flipped') || flippedCards.length === 2) return;
+
+        card.classList.add('flipped');
+        flippedCards.push(card);
+
+        if (flippedCards.length === 2) {
+          const [first, second] = flippedCards;
+
+          if (first.dataset.image === second.dataset.image) {
+            matched += 1;
+            flippedCards = [];
+            if (matched === images.length) {
+              // All matched!
+              setTimeout(() => {
+                 const options = JSON.parse(localStorage.getItem('giftOptions') || '[]');
+  const pick = options[Math.floor(Math.random() * options.length)] || 'My love forever ❤️';
+
+  // Show the gift result
+  document.getElementById('giftResult').textContent = pick;
+  document.getElementById('giftContainer').style.display = 'block';
+
+  // Create a continue button (after the gift is picked)
+  const nextBtn = document.createElement('button');
+  nextBtn.textContent = '💌 Continue to Next Level';
+  nextBtn.style.marginTop = '20px';
+  nextBtn.style.padding = '10px 20px';
+  nextBtn.style.fontSize = '16px';
+  nextBtn.style.border = 'none';
+  nextBtn.style.borderRadius = '10px';
+  nextBtn.style.backgroundColor = '#e63946';
+  nextBtn.style.color = '#fff';
+  nextBtn.style.cursor = 'pointer';
+  nextBtn.style.transition = 'transform 0.2s';
+  nextBtn.onmouseover = () => nextBtn.style.transform = 'scale(1.05)';
+  nextBtn.onmouseleave = () => nextBtn.style.transform = 'scale(1)';
+
+  // Button click redirects to question page
+  nextBtn.onclick = () => {
+    window.location.href = 'question1.html'; // 👉 update to your next phase
+  };
+
+  // Add the button after showing gift
+  document.getElementById('giftContainer').appendChild(nextBtn);
+              }, 600);
+            }
+          } else {
+            setTimeout(() => {
+              first.classList.remove('flipped');
+              second.classList.remove('flipped');
+              flippedCards = [];
+            }, 1000);
+          }
+        }
+      });
+
+      gameGrid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

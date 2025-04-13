@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our First Movie Together 💑🎬</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fff0f5, #ffe0e9);
+      text-align: center;
+      padding: 50px;
+      overflow-x: hidden;
+    }
+    h1 {
+      color: #e63946;
+      font-size: 28px;
+    }
+    .question {
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    .option-btn {
+      background-color: #f06292;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 15px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .option-btn:hover {
+      transform: scale(1.05);
+    }
+    #giftContainer {
+      display: none;
+      margin-top: 30px;
+    }
+    #giftResult {
+      font-size: 24px;
+      color: #d62828;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
+      background-size: contain;
+      animation: float 2s linear forwards;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-200px); opacity: 0; }
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f06292;
+      animation: confetti-fall 2s linear forwards;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💖 What was the first movie we watched during long distance?</h1>
+
+  <div class="question" id="questionBox">
+    <button class="option-btn" onclick="checkAnswer('A', this)">A) Godzilla</button>
+    <button class="option-btn" onclick="checkAnswer('B', this)">B) 12th Fail</button>
+    <button class="option-btn" onclick="checkAnswer('C', this)">C) Fifty Shades of Grey</button>
+    <button class="option-btn" onclick="checkAnswer('D', this)">D) Twilight</button>
+  </div>
+
+  <div id="giftContainer">
+    <h2 id="giftResult"></h2>
+  </div>
+
+  <audio id="winSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_263c975c25.mp3"></audio>
+
+  <script>
+    let hasAnswered = false;
+
+    function checkAnswer(choice, btn) {
+      if (hasAnswered) return;
+      hasAnswered = true;
+
+      // Disable all buttons
+      const allBtns = document.querySelectorAll('.option-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      const isCorrect = choice === 'D';
+      const options = JSON.parse(localStorage.getItem('giftOptions') || '[]');
+      const pick = options[Math.floor(Math.random() * options.length)] || 'My love forever ❤️';
+
+      document.getElementById('giftResult').textContent = isCorrect
+        ? `oh!!! Hoooo Mero Queen👑! You won: ${pick} 🥰`
+        : `Aww 😢 but I still love you so much! 💓 Here's your reward: ${pick}`;
+
+      document.getElementById('giftContainer').style.display = 'block';
+
+      document.getElementById('winSound').play();
+      floatHearts();
+
+      if (isCorrect) triggerConfetti();
+
+      // Continue button
+      const nextBtn = document.createElement('button');
+      nextBtn.textContent = '💌 Your Final Reward is ';
+      nextBtn.style.marginTop = '20px';
+      nextBtn.style.padding = '10px 20px';
+      nextBtn.style.fontSize = '16px';
+      nextBtn.style.border = 'none';
+      nextBtn.style.borderRadius = '10px';
+      nextBtn.style.backgroundColor = '#e63946';
+      nextBtn.style.color = '#fff';
+      nextBtn.style.cursor = 'pointer';
+      nextBtn.style.transition = 'transform 0.2s';
+      nextBtn.onmouseover = () => nextBtn.style.transform = 'scale(1.05)';
+      nextBtn.onmouseleave = () => nextBtn.style.transform = 'scale(1)';
+      nextBtn.onclick = () => {
+        window.location.href = 'final-gift.html';
+      };
+      setTimeout(() => {
+        document.getElementById('giftContainer').appendChild(nextBtn);
+      }, 300);
+    }
+
+    function floatHearts() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.top = '80%';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }
+    }
+
+    function triggerConfetti() {
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.top = `${Math.random() * 50}px`;
+        confetti.style.backgroundColor = i % 2 === 0 ? '#ff6b6b' : '#fcd5ce';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 2000);
+      }
+    }
+  </script>
+
+</body>
+</html>
