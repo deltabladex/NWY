@@ -131,35 +131,30 @@
             if (matched === images.length) {
               // All matched!
               setTimeout(() => {
-                 const options = JSON.parse(localStorage.getItem('giftOptions') || '[]');
-  const pick = options[Math.floor(Math.random() * options.length)] || 'My love forever ❤️';
+                const options = ['50rs', '100rs', 'data 500mb', 'chowchow', 'chocolate', 'chowmein', 'momo', 'burger', '1000rs', 'random movie night', 'cute surprise'];
+                const pick = options[Math.floor(Math.random() * options.length)];
 
-  // Show the gift result
-  document.getElementById('giftResult').textContent = pick;
-  document.getElementById('giftContainer').style.display = 'block';
+                document.getElementById('giftResult').textContent = pick;
+                document.getElementById('giftContainer').style.display = 'block';
 
-  // Create a continue button (after the gift is picked)
-  const nextBtn = document.createElement('button');
-  nextBtn.textContent = '💌 Continue to Next Level';
-  nextBtn.style.marginTop = '20px';
-  nextBtn.style.padding = '10px 20px';
-  nextBtn.style.fontSize = '16px';
-  nextBtn.style.border = 'none';
-  nextBtn.style.borderRadius = '10px';
-  nextBtn.style.backgroundColor = '#e63946';
-  nextBtn.style.color = '#fff';
-  nextBtn.style.cursor = 'pointer';
-  nextBtn.style.transition = 'transform 0.2s';
-  nextBtn.onmouseover = () => nextBtn.style.transform = 'scale(1.05)';
-  nextBtn.onmouseleave = () => nextBtn.style.transform = 'scale(1)';
+                const nextBtn = document.createElement('button');
+                nextBtn.textContent = '💌 Continue to Next Level';
+                nextBtn.style.marginTop = '20px';
+                nextBtn.style.padding = '10px 20px';
+                nextBtn.style.fontSize = '16px';
+                nextBtn.style.border = 'none';
+                nextBtn.style.borderRadius = '10px';
+                nextBtn.style.backgroundColor = '#e63946';
+                nextBtn.style.color = '#fff';
+                nextBtn.style.cursor = 'pointer';
+                nextBtn.style.transition = 'transform 0.2s';
+                nextBtn.onmouseover = () => nextBtn.style.transform = 'scale(1.05)';
+                nextBtn.onmouseleave = () => nextBtn.style.transform = 'scale(1)';
+                nextBtn.onclick = () => {
+                  window.location.href = 'kk.html';
+                };
 
-  // Button click redirects to question page
-  nextBtn.onclick = () => {
-    window.location.href = 'kk.html'; // 👉 update to your next phase
-  };
-
-  // Add the button after showing gift
-  document.getElementById('giftContainer').appendChild(nextBtn);
+                document.getElementById('giftContainer').appendChild(nextBtn);
               }, 600);
             }
           } else {
